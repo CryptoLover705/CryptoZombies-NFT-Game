@@ -4,15 +4,15 @@ import "./zombiefeeding.sol";
 
 contract ZombieHelper is ZombieFeeding {
 
-  uint levelUpFee = 0.1 ether;
+  uint levelUpFee = 0.001 ether;
 
   modifier aboveLevel(uint _level, uint _zombieId) {
-    require(zombies[_zombieId].level >= _level, "level too low");
+    require(zombies[_zombieId].level >= _level);
     _;
   }
 
   function withdraw() external onlyOwner {
-    address payable _owner = address(uint160(owner()));
+    address _owner = owner();
     _owner.transfer(address(this).balance);
   }
 
@@ -21,7 +21,7 @@ contract ZombieHelper is ZombieFeeding {
   }
 
   function levelUp(uint _zombieId) external payable {
-    require(msg.value == levelUpFee, "incorrect fee");
+    require(msg.value == levelUpFee);
     zombies[_zombieId].level = zombies[_zombieId].level.add(1);
   }
 
@@ -33,7 +33,7 @@ contract ZombieHelper is ZombieFeeding {
     zombies[_zombieId].dna = _newDna;
   }
 
-  function getZombiesByOwner(address _owner) external view returns (uint[] memory) {
+  function getZombiesByOwner(address _owner) external view returns(uint[] memory) {
     uint[] memory result = new uint[](ownerZombieCount[_owner]);
     uint counter = 0;
     for (uint i = 0; i < zombies.length; i++) {
