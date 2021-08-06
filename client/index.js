@@ -25,15 +25,13 @@ var userAccount;
        });
       var cryptoZombiesAddress = "0x1A9b1Fb78b8db2e7916007F3b3b774Fa79e7A054";
       cryptoZombies = new web3js.eth.Contract(cryptoZombiesABI, cryptoZombiesAddress);
-      
 
-      let accountInterval = setInterval(function () {
-        
-        // if (web3.eth.accounts(0) !== userAccount) {
-        //   userAccount = web3.eth.accounts[0];
-      {
-          getZombiesByOwner(userAccount)
-            .then(displayZombies);
+        var accountInterval = setInterval(function() {
+          // Check if account has changed
+          if (web3.eth.accounts[0] !== userAccount) {
+            userAccount = web3.eth.accounts[0];
+            // Call a function to update the UI with the new account
+            getZombiesByOwner(userAccount)
         }
       }, 5000);
 
