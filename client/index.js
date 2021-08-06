@@ -17,11 +17,11 @@ var userAccount;
                 "eth_accounts": {}
             }
         ],
-        id: 0, 
+        // id: 0, 
        });
        await provider.request({ method: "eth_accounts",
        params: [],
-       id: 0, 
+    //    id: 0, 
        });
       var cryptoZombiesAddress = "0x1A9b1Fb78b8db2e7916007F3b3b774Fa79e7A054";
       cryptoZombies = new web3js.eth.Contract(cryptoZombiesABI, cryptoZombiesAddress);
@@ -29,9 +29,9 @@ var userAccount;
 
       let accountInterval = setInterval(function () {
         
-        if (web3.eth.accounts[0] !== userAccount) {
-          userAccount = web3.eth.accounts[0];
-
+        // if (web3.eth.accounts(0) !== userAccount) {
+        //   userAccount = web3.eth.accounts[0];
+      {
           getZombiesByOwner(userAccount)
             .then(displayZombies);
         }
